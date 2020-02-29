@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+  <meta content='ie=edge' http-equiv='X-UA-Compatible'>
+  <meta content='black' name='theme-color'>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+  <link href='https://fonts.googleapis.com/css?family=Merienda&amp;display=swap' rel='stylesheet'>
+  <link href='' rel='shortcut icon' type='image/png'>
+  <link href='https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+  <!-- Load the coco-ssd model. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+  <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+
+  <script src='https://cdn.jsdelivr.net/materialize/0.98.0/js/materialize.min.js'></script>
+  <link href='http://192.168.43.76:3000/static/css/homepage.css' rel='stylesheet' type='text/css'>
+  <title> BorrowBox </title>
+</head>
+
+<body>
+  <div id="rainbow-progress-bar" style="height: 6px; position: fixed; display: none;"></div>
+  <homePageHeader>
+    <nav>
+      <div class="nav-wrapper">
+        <a class="brand-logo" style="vertical-align:middle;">Borr<img
+            style="height:46px;display: inline; margin-bottom: -15px" src="/static/images/logo.svg">w Box</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a class="modal-trigger" href="#authpage">Login</a></li>
+          
+        </ul>
+      </div>
+    </nav>
+  </homePageHeader>
+  <homeSearchArea>
+    <div class="col s12" style="margin-top: 60px;font-family: 'Dosis', sans-serif;
+color: black">
+      <center><a style="font-size: 52px ;color:black;">Search <a
+            style="font-family: 'Liu Jian Mao Cao', cursive;font-size: 52px;">Borr<img
+              style="height:76px;display: inline; margin-bottom: -15px" src="/static/images/logo.svg">w Box </a> <a
+            style="font-size: 52px;color: black;"> For </a> </a>
+        <a href="" style="font-size: 52px; color: black;font-family: 'Liu Jian Mao Cao', cursive;" class="typewrite"
+          data-period="1000" data-type='[ "Electronics", "Books", "First-Aid", "Sports Equipments" ]'>
+          <span style="margin-top: 30px;" class="wrap"></span></a></center>
+    </div>
+    <div class="row homeSearchArea">
+
+      <div class="col s12" style="margin-bottom: 50px; margin-top: 20px;">
+        <div class="col s12 m2"></div>
+        <div class="search_box col s12 m6">
+          <center> <input class='msg_box' name="search_box" id="search_input" style='display: inline; vertical-align: middle;' type='text' /></center>
+        </div>
+        <div class="col s12 m2" style="margin-top: 1.5em">
+          <center>
+            <div class="btn btn-large search-btn " style="margin-left: 12px;vertical-align: middle;width:150px;" id="do_a_search">Search
+            </div>
+          </center>
+        </div>
+        <div class="col s12 m2"> <center> <select style="vertical-align: middle; margin-top: 32px;" id="category" class="browser-default">
+            <option value="all" selected>all</option>
+            <option value="electronics">Electronics</option>
+            <option value="Books">Books</option>
+            <option value="sports">Sports Equip</option>
+            <option value="med">First Aid</option>
+  </select>
+</center></div>
+      </div>
+     <div class="red_"><center><div class="btn btn-large" id="login_btn" style="margin-left: 12px;vertical-align: middle; border-radius: 40px;background-color: black;"> Go To Your Dashboard <i class="material-icons" style="vertical-align: middle;color: white;font-size:32px;">
+exit_to_app
+</i>
+     </div>    </center></div>
+    </div>
+  </homeSearchArea>
+  <div class="row">
+    <div class="col s12 ">
+      <homeExpSection>
+        <div class="col s12 m4">
+          <center>
+            <blockquote><img src="/static/images/place.svg" class="img-exp"><br>
+              Place Your Product</blockquote>
+          </center>
+        </div>
+        <div class="col s12 m4">
+          <center>
+            <blockquote><img src="/static/images/request.svg" class="img-exp"><br>Or Request To lend A Product</blockquote>
+          </center>
+        </div>
+        <div class="col s12 m4">
+          <center>
+            <blockquote><img src="/static/images/collect.svg" class="img-exp"><br>Collect The Product From The Owner
+            </blockquote>
+          </center>
+        </div>
+      </homeExpSection>
+    </div>
+  </div>
+  <div class="row">
+  	<div class="file-field  container">
+      <img id="abcd" style="display: none;"/>
+      <div class="btn" style="background-color: black; border-radius: 45px;">
+        <span>Upload Image</span>
+        <input type="file" id ="search-upload-img">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" >
+      </div>
+    </div>
+    <center><div class="btn-large" id="search-trigger" style="background:linear-gradient(45deg, #303f9f, #7b1fa2);border-radius: 45px;">Search</div></center>
+  </div>
+  <footer class="page-footer" style="background-color: black;color: white !important; padding-top: 0px;">
+   
+    <div class="footer-copyright">
+      <div class="container">
+      © 2019 BorrowBox
+      <a class="grey-text text-lighten-4 right" href="https://github.com/rahultripathidev/hackman_2k19">🐱/BorrowBox</a>
+      </div>
+    </div>
+  </footer>
+   <div id="authpage" class="modal bottom-sheet">
+    <div class="modal-content">
+      <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="User_name" id="auth_user_name" type="text" class="validate">
+          <label for="first_name">User Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="auth_pass_name" type="Password" placeholder="Password" class="validate">
+          <label for="last_name">Password</label>
+        </div>
+      </div>
+    </form>
+    <div class="login_btn"><center><div class="btn btn-large " id="login_btn_" style="margin-left: 12px;vertical-align: middle;width:150px; border-radius: 40px;background-color: black;">Login
+            </div></center></div>
+    </div>
+      </div>
+      </div>
+      <div id="search_result" class="modal">
+          <div class="modal-content" id="search_modal_disp">
+<div ><table class="highlight responsive-table">
+    <thead>
+      <tr>
+          <th>Product Name</th>
+          <th>Product Category</th>
+          <th>Product Rating</th>
+      </tr>
+    </thead>
+    <tbody id="search_disp"></tbody>
+    </table>
+  
+
+            </div>
+          
+        </div>
+       
+  <script type="text/javascript " src="/static/js/typewriter.js"></script>
+   <script type="text/javascript " src="/static/js/home.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+  <meta content='ie=edge' http-equiv='X-UA-Compatible'>
+  <meta content='black' name='theme-color'>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+
+  <link href='https://fonts.googleapis.com/css?family=Merienda&amp;display=swap' rel='stylesheet'>
+  <link href='' rel='shortcut icon' type='image/png'>
+  <link href='https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Round' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css' rel='stylesheet'>
+
+  <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+
+  <script src='https://cdn.jsdelivr.net/materialize/0.98.0/js/materialize.min.js'></script>
+  <link href='http://192.168.43.76:3000/static/css/dashboard.css' rel='stylesheet' type='text/css'>
+  <title> Borrow Box | Dashboard </title>
+</head>
+
+</head>
+
+<body>
+  <div class="view-area" style="z-index: -1">
+    <homePageHeader>
+      <nav>
+        <div class="nav-wrapper">
+          <a class="brand-logo" style="vertical-align:middle;">Borr<img
+              style="height:46px;display: inline; margin-bottom: -15px" src="/static/images/logo.svg">w Box</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a class="modal-trigger" id="logout">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+    </homePageHeader>
+  </div>
+
+  <div class="row">
+
+    <div class="disp-area col s12 ">
+      <account>
+        <div class="loader " style="margin-top: 15%; margin-left:50%;" id="acc_loader"><img class="rotate-center"
+            src="/static/images/logo.svg" style="height: 100px; ">
+          <h5>Loading</h5>
+        </div>
+        <div id="acc_info" class="row" style="display: none;">
+          <center>
+            <div class="row" style="color: white; background:linear-gradient(45deg, #303f9f, #7b1fa2) !important; ">
+              <div class="col s12 m3"><img id="usr_img" src=""
+                  style="height: 180px;border-radius: 50%; margin-top: 10px; "></div>
+              <div class="col s12 m9">
+                <center>
+                  <h4>Welcome Back <a id="user_name" class="user_info" style="color: white;"></a> !</h4>
+                  <h5 id="u_id"></h5>
+                  <h5 id="u_address"></h5>
+                </center>
+              </div>
+            </div>
+      </account>
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs">
+            <li class="tab col s3"><a class="active" href="#search_box">Search </a></li>
+            <li class="tab col s3"><a href="#request_list">Request List</a></li>
+            <li class="tab col s3"><a href="#my_box">My Box</a></li>
+            <li class="tab col s3"><a href="#my_lend_box">My Lend Box</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <userSearchArea id="search_box">
+        <div class="row">
+          <div class="card" style="">
+            <div class="col s12" style="margin-bottom: 50px; ">
+              <div class="col s12 m2"></div>
+              <div class="search_box col s12 m6">
+                <center> <input class='msg_box' name="search_box" id="search_box_data"
+                    style='display: inline; vertical-align: middle;' type='text'></center>
+              </div>
+              <div class="col s12 m2" style="margin-top: 1.5em">
+                <center>
+                  <div class="btn btn-large search-btn " id="search_btn"
+                    style="margin-left: 12px;vertical-align: middle;width:150px;">Search
+                  </div>
+                </center>
+              </div>
+              <div class="col s12 m2">
+                <center> <select style="vertical-align: middle; margin-top: 32px;" id="category_selector"
+                    class="browser-default">
+                    <option value="all" selected>all</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="Books">Books</option>
+                    <option value="sports">Sports Equip</option>
+                    <option value="med">First Aid</option>
+                  </select>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="user_search_results">
+
+        </div>
+      </userSearchArea>
+
+      <div class="row" id="request_list">
+        <request_list>
+          <h4 style="margin-left: 12px;">My request List</h4>
+<div id="req_list_disp" class="row"></div>
+        </request_list>
+      </div>
+      <div class="row" id="my_box">
+        <my_box style=" text-align: center; ">
+          <center>
+            <h4 style="margin-left: 12px;">My Box</h4>
+          </center>
+          <div id="my_box_disp"></div>
+          <div class="fixed-action-btn">
+            <a class="btn-floating btn-large black modal-trigger" href="#add_to_box">
+              <i class="large material-icons">add</i>
+            </a>
+
+          </div>
+        </my_box>
+      </div>
+      <div class="row" id="my_lend_box">
+        <my_lend_box>
+          <center>
+            <h4 style="margin-left: 12px;">My Lend Box</h4>
+            <div id="lend_box" class="row"></div>
+          </center>
+        </my_lend_box>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Trigger -->
+  <!-- Modal Structure -->
+  <div id="add_to_box" class="modal">
+    <div class="modal-content">
+      <center>
+        <h4>Add a New Object</h4>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="prod_name" type="text" class="validate">
+                <label for="prod_name">Product Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="prod_desc" type="text" class="validate">
+                <label for="prod_desc">Product Description</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <select id="prod_category" class="browser-default">
+                  <option value="electronics" selected>Electronics</option>
+                  <option value="Books">Books</option>
+                  <option value="sports">Sports Equip</option>
+                  <option value="med">First Aid</option>
+                </select>
+
+              </div>
+
+              <div class="input-field col s6">
+                <input id="prod_rating" type="number" class="validate">
+                <label for="prod_rating">Product Rating</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="prod_man" type="text" class="validate">
+                <label for="prod_man">Manufacturer</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="prod_yop" type="date" class="validate">
+                <label for="prod_yop">Year Of Production</label>
+              </div>
+            </div>
+            <div class="file-field input-field">
+              <div class="btn" style="background-color: black;">
+                <span>File</span>
+                <input type="file" id="prod_image">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" name="prod_image" type="text">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="btn btn-large submit-btn " id="new_prod_submit_btn"
+          style="margin-left: 12px;vertical-align: middle;width:150px;">Submit
+        </div>
+      </center>
+    </div>
+
+  </div>
+  <div id="make_request" class="modal">
+    <div class="modal-content">
+      <h4>Make A New Request</h4>
+      <p>
+        <div class="col s12 m6" style="vertical-align:middle; margin-top: 20px;">
+          <h5 style="margin-top: 12px;">Object:<a id="req_obj_id"></a></h5>
+        </div><br>
+        <div class="input-field col s6">
+          <input id="lend_till" type="date" class="validate">
+          <label for="lend_till">Lend Till</label>
+        </div>
+      </p>
+      <center>
+        <div class="btn btn-large submit-btn " id="make_final_req"
+          style="margin-left: 12px;vertical-align: middle;width:150px;">Submit
+        </div>
+      </center>
+    </div>
+  </div>
+  <div id="approve_request" class="modal">
+      <div class="modal-content">
+        <h4>Approve The Request</h4>
+        <p>
+          <div class="col s12 m6" style="vertical-align:middle; margin-top: 20px;">
+            <h5 style="margin-top: 12px;">Object:<a id="approve_id" style="">hgjhgjh</a></h5>
+           </div><br>
+          <div class="input-field col s6">
+            <input id="approved_till" type="date" class="validate">
+            <label for="approved_till">Approved Till</label>
+          </div>
+        </p>
+        <center>
+          <div class="btn btn-large submit-btn " id="approve_req_btn"
+            style="margin-left: 12px;vertical-align: middle;width:150px;">Submit
+          </div>
+        </center>
+      </div>
+    </div>
+  <script type="text/javascript " src="/static/js/dashboard.js"></script>
+</body>
+
+</html>
