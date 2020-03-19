@@ -36,7 +36,7 @@ const _schema = mongoose.Schema({
     collection: 'borrow_box_users'
 })
 const _users = mongoose.model('users', _schema);
-mongoose.connect('mongodb+srv://root:123@cluster0-prslr.mongodb.net/borrow_box', {
+mongoose.connect('YOUR MONGOD CONN STRINGS', {
     useNewUrlParser: true
 })
 
