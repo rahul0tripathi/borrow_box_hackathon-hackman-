@@ -25,7 +25,7 @@ var _Obj = mongoose.Schema({
 })
 
 var _inventory = mongoose.model('_inventory', _Obj)
-mongoose.connect('mongodb+srv://root:123@cluster0-prslr.mongodb.net/borrow_box', {
+mongoose.connect('YOUR MONGOD CONNECTION STRING', {
     useNewUrlParser: true,
     useFindAndModify: true,
     useCreateIndex: true,
